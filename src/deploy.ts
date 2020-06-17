@@ -1,13 +1,9 @@
 import * as core from '@actions/core';
-import { issueCommand } from '@actions/core/lib/command';
 import * as path from 'path';
-import * as fs from 'fs';
 import * as io from '@actions/io';
 import * as toolCache from '@actions/tool-cache';
-
 import { downloadKubectl, getStableKubectlVersion } from "./utilities/kubectl-util";
 import { getExecutableExtension, isEqual } from "./utilities/utility";
-
 import { Kubectl } from './utilities/kubectl-object-model';
 import { deploy } from './utilities/strategy-helpers/deployment-helper';
 import { promote } from './actions/promote';

@@ -1,15 +1,12 @@
 import * as core from '@actions/core';
-import { issueCommand } from '@actions/core/lib/command';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as io from '@actions/io';
 import * as toolCache from '@actions/tool-cache';
-import * as os from 'os';
 import { ToolRunner } from "@actions/exec/lib/toolrunner";
 import * as jsyaml from 'js-yaml';
 import * as util from 'util';
-
-import { getExecutableExtension, isEqual } from "./utilities/utility";
+import { getExecutableExtension } from "./utilities/utility";
 
 
 function getKubeconfig(): string {
@@ -101,7 +98,6 @@ export async function run_set_context() {
     core.debug(`Writing kubeconfig contents to ${kubeconfigPath}`);
     fs.writeFileSync(kubeconfigPath, kubeconfig);
     core.exportVariable('KUBECONFIG', kubeconfigPath);
-    //issueCommand('set-env', { name: 'KUBECONFIG' }, kubeconfigPath);
     console.log('KUBECONFIG environment variable is set');
     await setContext();
 }

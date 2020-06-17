@@ -1,16 +1,13 @@
 import * as core from '@actions/core';
-import { issueCommand } from '@actions/core/lib/command';
 import * as path from 'path';
 import * as io from '@actions/io';
 import * as toolCache from '@actions/tool-cache';
 import { ToolRunner } from "@actions/exec/lib/toolrunner";
-
 import { argStringToArray } from "@actions/exec/lib/toolrunner";
-
-import { getExecutableExtension, isEqual } from "./utilities/utility";
-
+import { getExecutableExtension } from "./utilities/utility";
 
 import fileUtility = require('./utilities/file')
+
 
 let kubectlPath = "";
 

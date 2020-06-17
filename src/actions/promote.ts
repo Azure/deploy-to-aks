@@ -9,6 +9,7 @@ import * as TaskInputParameters from '../utilities/input-parameters';
 
 import { Kubectl } from '../utilities/kubectl-object-model';
 
+
 export async function promote(ignoreSslErrors?: boolean) {
     const kubectl = new Kubectl(await utils.getKubectl(), TaskInputParameters.namespace, ignoreSslErrors);
 

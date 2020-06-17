@@ -6,6 +6,7 @@ import { Kubectl } from '../utilities/kubectl-object-model';
 import * as utils from '../utilities/manifest-utilities';
 import * as TaskInputParameters from '../utilities/input-parameters';
 
+
 export async function reject(ignoreSslErrors?: boolean) {
     const kubectl = new Kubectl(await utils.getKubectl(), TaskInputParameters.namespace, ignoreSslErrors);
 

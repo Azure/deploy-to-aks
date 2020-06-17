@@ -1,5 +1,4 @@
 import * as core from '@actions/core';
-
 import { run_set_context } from './set-context';
 import { run_create_secret } from './create-secret';
 import { run_deploy } from './deploy';
