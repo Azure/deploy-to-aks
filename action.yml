@@ -1,0 +1,104 @@
+name: 'Kubernetes deploy'
+description: 'Kubernetes deploy'
+inputs: 
+# Used for setting the target K8s cluster context which will be used by other actions like azure/k8s-actions/k8s-deploy or azure/k8s-actions/k8s-create-secret
+  method:
+    description: 'Acceptable values: kubeconfig or service-account'
+    required: true
+    default: 'kubeconfig'
+  kubeconfig:
+    description: 'Contents of kubeconfig file'
+    required: false
+    default: ''
+  context:
+    description: 'If your kubeconfig has multiple contexts, use this field to use a specific context, otherwise the default one would be chosen'
+    required: false
+    default: ''
+
+  k8s-url:
+    description: 'Cluster Url'
+    required: false
+    default: ''
+  k8s-secret:
+    description: 'Service account secret. Run kubectl get serviceaccounts <service-account-name> -o yaml and copy the service-account-secret-name. Copy the ouptut of kubectl get secret <service-account-secret-name> -o yaml'
+    required: false
+    default: ''
+  
+
+  namespace:
+    description: 'Choose the target Kubernetes namespace. If the namespace is not provided, the commands will run in the default namespace.'
+    required: false
+  container-registry-url:
+    description: 'Container registry url'
+    required: false
+  container-registry-username:
+    description: 'Container registry username'
+    required: false
+  container-registry-password:
+    description: 'Container registry password'
+    required: false
+  container-registry-email:
+    description: 'Container registry email'
+    required: false    
+  secret-type:
+    description: 'Type of Kubernetes secret. For example, docker-registry or generic'
+    required: true
+    default: 'docker-registry'
+  secret-name:
+    description: 'Name of the secret. You can use this secret name in the Kubernetes YAML configuration file.'
+    required: true
+  arguments:
+    description: 'Specify keys and literal values to insert in generic type secret.For example, --from-literal=key1=value1 --from-literal=key2="top secret".'
+    required: false
+
+
+  manifests:
+    description: 'Path to the manifest files which will be used for deployment.'
+    required: true
+    default: ''
+  images: 
+    description: 'Fully qualified resource URL of the image(s) to be used for substitutions on the manifest files Example: contosodemo.azurecr.io/helloworld:test'
+    required: false
+  imagepullsecrets:
+    description: 'Name of a docker-registry secret that has already been set up within the cluster. Each of these secret names are added under imagePullSecrets field for the workloads found in the input manifest files'
+    required: false
+  kubectl-version:
+      description: 'Version of kubectl. Installs a specific version of kubectl binary'
+      required: false
+  strategy:
+    description: 'Deployment strategy to be used. Allowed values are none, canary'
+    required: false
+    default: 'none'
+  traffic-split-method:
+    description: "Traffic split method to be used. Allowed values are pod, smi"
+    required: false
+    default: 'pod'
+  baseline-and-canary-replicas:
+    description: 'Baseline and canary replicas count; valid value i.e between 0 to 100.'
+    required: false
+    default: 0
+  percentage: 
+    description: 'Percentage of traffic redirect to canary deployment'
+    required: false
+    default: 0
+  args:
+    description: 'Arguments'
+    required: false
+  action:
+    description: 'deploy/promote/reject'
+    required: true
+    default: 'deploy'
+
+
+outputs:
+  secret-name:
+    description: 'Secret name'
+  
+branding:
+  color: 'green' # optional, decorates the entry in the GitHub Marketplace
+
+
+runs:
+  using: 'node12'
+  main: 'lib/run.js'
+  

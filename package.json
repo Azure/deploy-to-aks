@@ -1,0 +1,30 @@
+{
+    "name": "k8s-deploy",
+    "version": "0.0.0",
+    "private": true,
+    "main": "lib/run.js",
+    "scripts": {
+        "build": "tsc --outDir .\\lib\\ --rootDir .\\src\\"
+    },
+    "keywords": [
+        "actions",
+        "node",
+        "setup"
+    ],
+    "author": "GitHub",
+    "dependencies": {
+        "@actions/core": "^1.2.4",
+        "@actions/exec": "^1.0.0",
+        "@actions/io": "^1.0.0",
+        "@actions/tool-cache": "^1.0.0",
+        "js-yaml": "^3.13.1",
+        "preact": "^10.4.4"
+    },
+    "devDependencies": {
+        "@types/node": "^12.0.4",
+        "typescript": "^3.5.2",
+        "jest": "^26.0.1",
+        "@types/jest": "^25.2.2",
+        "ts-jest": "^25.5.1"
+    }
+}
