@@ -24,7 +24,7 @@ There are three different sections of this action:
  If you are looking to automate your workflows to deploy to [Azure Web Apps](https://azure.microsoft.com/en-us/services/app-service/web/) and [Azure Web App for Containers](https://azure.microsoft.com/en-us/services/app-service/containers/), consider using [`Azure/webapps-deploy`](https://github.com/Azure/webapps-deploy) action.
   
 ## Action inputs
-Refer to the action metadata file for details about all the inputs https://github.com/Azure/deploy-to-aks/blob/master/action.yml
+Refer to the action detail file for details about all the inputs https://github.com/Azure/deploy-to-aks/blob/releases/preview/Action_inputs.md
 
 ## Example usage
 ### Kubeconfig approach to set context and creating docker-registry secret 
