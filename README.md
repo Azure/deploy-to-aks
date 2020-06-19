@@ -17,7 +17,7 @@ There are three different sections of this action:
   
   The secret will be created in the cluster context which was set earlier in the workflow and will be used to pull images from registry.
   
-  **Note:** This action can create only one secret. For using multiple secrets in deployment please use [k8s-cerete-secret](https://github.com/Azure/k8s-create-secret) action seperately.
+  **Note:** This action can create only one secret. For using multiple secrets in deployment please use [k8s-create-secret](https://github.com/Azure/k8s-create-secret) action seperately.
 - **Deploy to Azure Kubernetes Cluster:**  
   This part of the action is used to deploy manifests to Azure Kubernetes clusters.
 
@@ -35,7 +35,7 @@ Refer to the action detail file for details about all the inputs https://github.
     kubeconfig: <your kubeconfig> # Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
     context: <context name>  #If left unspecified, current-context from kubeconfig is used as default
     
-    container-registry-url: <your container regostry url>
+    container-registry-url: <your container registry url>
     container-registry-username: # Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
     container-registry-password: # Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
     secret-name: <registry secret name to be created>
@@ -66,7 +66,7 @@ Further details can be found in [az aks get-credentials documentation](https://d
 ### Service account approach to set context and creating generic secret
 
 ```yaml
-- uses: azure/k8s-set-context@v1
+- uses: azure/deploy-to-aks@v1
   with:
     method: service-account
     k8s-url: <URL of the cluster's API server>
