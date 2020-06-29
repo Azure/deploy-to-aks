@@ -1,0 +1,13 @@
+name: "build-test"
+on: [push]
+
+jobs:
+  build: # make sure build/ci works properly
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - run: |
+        npm install
+        npm build
+        chmod +rwx ./node_modules/.bin/jest
+        npm test
