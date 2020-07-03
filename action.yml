@@ -1,6 +1,7 @@
 name: 'Deploy to AKS'
 description: 'Deploy to Azure Kubernetes Cluster'
 inputs: 
+  # inputs specific to set context
   method:
     description: 'Acceptable values: kubeconfig or service-account'
     required: true
@@ -23,10 +24,7 @@ inputs:
     required: false
     default: ''
   
-
-  namespace:
-    description: 'Choose the target Kubernetes namespace. If the namespace is not provided, the commands will run in the default namespace.'
-    required: false
+  # inputs specific to create secret
   container-registry-url:
     description: 'Container registry url'
     required: false
@@ -50,7 +48,7 @@ inputs:
     description: 'Specify keys and literal values to insert in generic type secret.For example, --from-literal=key1=value1 --from-literal=key2="top secret".'
     required: false
 
-
+  # inputs specific to deploy to aks
   manifests:
     description: 'Path to the manifest files which will be used for deployment.'
     required: true
@@ -87,6 +85,11 @@ inputs:
     description: 'deploy/promote/reject'
     required: true
     default: 'deploy'
+
+  # Common Inputs
+  namespace:
+    description: 'Choose the target Kubernetes namespace. If the namespace is not provided, the commands will run in the default namespace.'
+    required: false
 
 
 outputs:
