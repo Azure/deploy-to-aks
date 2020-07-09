@@ -1,5 +1,5 @@
 name: 'Deploy to AKS'
-description: 'Deploy to Azure Kubernetes Cluster'
+description: 'Deploy to an Azure Kubernetes Service cluster'
 inputs: 
   # inputs specific to set context
   method:
@@ -45,7 +45,7 @@ inputs:
     description: 'Name of the secret. You can use this secret name in the Kubernetes YAML configuration file.'
     required: true
   arguments:
-    description: 'Specify keys and literal values to insert in generic type secret.For example, --from-literal=key1=value1 --from-literal=key2="top secret".'
+    description: 'Specify keys and literal values to insert in generic type secret. For example, --from-literal=key1=value1 --from-literal=key2="top secret".'
     required: false
 
   # inputs specific to deploy to aks

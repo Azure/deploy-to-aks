@@ -1,33 +1,30 @@
-# Deploy action for Azure Kubernetes Cluster
+# Deploy action for Azure Kubernetes Service
 
-This action can be used to deploy manifests to Azure Kubernetes clusters.
+This action is dedicated to deploying workloads to Azure Kubernetes Service. A single action to take care of all the tasks required to deploy to AKS.
 
-There are three different sections of this action:
-- **Kubernetes set context:**   
-   This part of action is used to set cluster context before creating secret and deploying to Azure kubernetes cluster so that kubectl commands can be used subsequently in the action.
+There are three parts to this action-
+- **Setting the Kubernetes Context**   
+  This part of the action is used to set the cluster context required for creating secrets and deploying. Subsequent actions/scripts in the workflow can leverage this to run any `kubectl` commands.
 
   There are two approaches for specifying the deployment target:
-
   - Kubeconfig file provided as input to the action
   - Service account approach where the secret associated with the service account is provided as input to the action
 
-  If inputs related to both these approaches are provided, kubeconfig approach related inputs are given precedence.
-- **Kubernetes create secret **(Optional)**:**  
-  This part of the action will create a [generic secret or docker-registry secret](https://kubernetes.io/docs/concepts/configuration/secret/) in Kubernetes cluster. This part is optional and only to be used when creating new secret.
+  If inputs related to both these approaches are provided, the kubeconfig approach related inputs are given precedence.
+- **Create a Kubernetes secret (Optional)**  
+  This part of the action will create a [generic secret or docker-registry secret](https://kubernetes.io/docs/concepts/configuration/secret/) in the Kubernetes cluster. This is optional and only needs to be used when creating a new secret.
   
-  The secret will be created in the cluster context which was set earlier in the workflow and will be used to pull images from registry.
+  The secret will be created in the cluster for which the context was set and can be used to pull images from a registry.
   
-  **Note:** This action can create only one secret. For using multiple secrets in deployment please use [k8s-create-secret](https://github.com/Azure/k8s-create-secret) action seperately.
-- **Deploy to Azure Kubernetes Cluster:**  
-  This part of the action is used to deploy manifests to Azure Kubernetes clusters.
-
- If you are looking to automate your workflows to deploy to [Azure Web Apps](https://azure.microsoft.com/en-us/services/app-service/web/) and [Azure Web App for Containers](https://azure.microsoft.com/en-us/services/app-service/containers/), consider using [`Azure/webapps-deploy`](https://github.com/Azure/webapps-deploy) action.
+  **Note:** This action can create only one secret. For using multiple secrets in the deployment, please use the [k8s-create-secret](https://github.com/Azure/k8s-create-secret) action seperately.
+- **Deployment Configuration**  
+  This part of the action is used to deploy manifests to Azure Kubernetes Service clusters. Other configuration options such as `kubectl` version, strategy and image name overrides can also be provided. Please check the inputs for more details.
   
 ## Action inputs
-Refer to the action detail file for details about all the inputs https://github.com/Azure/deploy-to-aks/blob/releases/preview/Action_inputs.md
+For a detailed description on all the action inputs and configurations, please refer to the [action inputs doc](https://github.com/Azure/deploy-to-aks/blob/master/Action_inputs.md).
 
-## Example usage
-### Kubeconfig approach to set context and creating docker-registry secret 
+## Sample usage
+### Kubeconfig approach to set context and creating a docker-registry secret 
 
 ```yaml
 - uses: azure/deploy-to-aks@v1
@@ -44,24 +41,19 @@ Refer to the action detail file for details about all the inputs https://github.
     imagepullsecrets: <secret names to pull images from registry>
 ```
 
-**Please note** that the input requires the _contents_ of the kubeconfig file, and not its path.
-
-For Azure Container registry refer to **admin [account document](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-authentication#admin-account)** for username and password. Now add the username and password as a secret in the GitHub repository.
-
-Use the below mentioned way to fetch kubeconfig file onto your local development machine so that the same can be used in the action input shown above:
-
-#### For Azure Kubernetes Service cluster
+Run the following script from an azure CLI enabled shell to get the kubeconfig file on a local machine and store it as a Github repository secret.
 
 ```sh
-az aks get-credentials --name
-                       --resource-group
-                       [--admin]
-                       [--file]
-                       [--overwrite-existing]
-                       [--subscription]
+az aks get-credentials --name <cluster-name>
+                       --resource-group <resource-group-name>
+                       --file <path-to-output-file>
 ```
 
-Further details can be found in [az aks get-credentials documentation](https://docs.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest#az-aks-get-credentials).
+Further details can be found in the [az aks get-credentials documentation](https://docs.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest#az-aks-get-credentials).
+
+**Please note** that the action input requires the _contents_ of the kubeconfig file, and not its path.
+
+To create a docker-registry secret for Azure Container Registry, its admin account will need to be enabled. Refer to the [admin account document](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-authentication#admin-account) for details. Now add the username and password of the registry as secrets in the GitHub repository.
 
 ### Service account approach to set context and creating generic secret
 
@@ -80,13 +72,13 @@ Further details can be found in [az aks get-credentials documentation](https://d
     imagepullsecrets: <secret names to pull images from registry>
 ```
 
-For fetching Server URL, execute the following command on your shell:
+For fetching the server URL, execute the following command on your shell:
 
 ```sh
 kubectl config view --minify -o 'jsonpath={.clusters[0].cluster.server}'
 ```
 
-For fetching Secret object required to connect and authenticate with the cluster, the following sequence of commands need to be run:
+For fetching secret object required to connect and authenticate with the cluster, the following sequence of commands needs to be run:
 
 ```sh
 kubectl get serviceAccounts <service-account-name> -n <namespace> -o 'jsonpath={.secrets[*].name}'

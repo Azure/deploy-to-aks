@@ -2,7 +2,7 @@
 
 ## Action inputs
 
-### Inputs specific to set cluster context
+### Inputs specific to setting the cluster context
 <table>
   <thead>
     <tr>
@@ -38,7 +38,7 @@
   </tr>
 </table>
 
-### Inputs specific to create secret (Optional)
+### Inputs specific to creating a Kubernetes secret (Optional)
 **Note:** Below mentioned inputs are only required when creating new secrets. For creating new secret please provide `secret-name` and required inputs. For skipping this part (create secret), do not specify `secret-name` as input.
 
 <table>
@@ -86,7 +86,7 @@
   </tr>
  </table>
  
-### Inputs specific to Azure Kubernetes Cluster deploy
+### Inputs specific to deployment configuration
  
  <table>
   <thead>
