@@ -1,12 +1,12 @@
 
 
-## Action inputs
+## Action Inputs
 
 ### Inputs specific to set cluster context
 <table>
   <thead>
     <tr>
-      <th>Action inputs</th>
+      <th>Action Inputs</th>
       <th>Required/Optional</th>
       <th>Description</th>
     </tr>
@@ -44,7 +44,7 @@
 <table>
   <thead>
     <tr>
-      <th>Action inputs</th>
+      <th>Action Inputs</th>
       <th>Required/Optional</th>
       <th>Description</th>
     </tr>
@@ -91,7 +91,7 @@
  <table>
   <thead>
     <tr>
-      <th>Action inputs</th>
+      <th>Action Inputs</th>
       <th>Required/Optional</th>
       <th>Description</th>
     </tr>
@@ -148,7 +148,7 @@
 <table>
   <thead>
     <tr>
-      <th>Action inputs</th>
+      <th>Action Inputs</th>
       <th>Required/Optional</th>
       <th>Description</th>
     </tr>
