@@ -21,7 +21,7 @@ There are three parts to this action-
   This part of the action is used to deploy manifests to Azure Kubernetes Service clusters. Other configuration options such as `kubectl` version, strategy and image name overrides can also be provided. Please check the inputs for more details.
   
 ## Action inputs
-For a detailed description on all the action inputs and configurations, please refer to the [action inputs doc](https://github.com/Azure/deploy-to-aks/blob/master/Action_inputs.md).
+For a detailed description on all the action inputs and configurations, please refer to the [action inputs doc](https://github.com/Azure/deploy-to-aks/blob/master/action_inputs.md).
 
 ## Sample usage
 ### Kubeconfig approach to set context and creating a docker-registry secret 
